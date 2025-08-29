@@ -7,69 +7,161 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    .btn-custom { border: 2px solid #6c757d; border-radius: 10px; min-width: 50px; }
-    .palette { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
-    .swatch { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #ddd; cursor: pointer; }
-    .swatch:hover { border-color: #000; }
+    body {
+      background: radial-gradient(1200px 800px at 20% 0%, #0b1224 0%, #0f172a 40%, #0a0f1f 100%);
+      color: #e5e7eb;
+    }
+    .shell {
+      max-width: 1100px;
+      margin: 24px auto;
+      background: rgba(17, 24, 39, 0.65);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.02);
+    }
+    .logo {
+      max-width: 160px;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35));
+    }
+    .panel {
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .group-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .btn-custom {
+      border: 1px solid #475569;           /* slate-600 */
+      border-radius: 12px;
+      min-width: 48px;
+      height: 44px;
+      color: #e5e7eb;
+      background: linear-gradient(180deg, #0b1224 0%, #111827 100%);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05), 0 8px 20px rgba(0,0,0,0.25);
+      transition: transform .06s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .btn-custom:hover { border-color: #64748b; }  /* slate-500 */
+    .btn-custom:active { transform: translateY(1px); }
+    .btn-selected {
+      border-color: #60a5fa !important;    /* blue-400 */
+      box-shadow: 0 0 0 3px rgba(96,165,250,0.25), 0 8px 20px rgba(0,0,0,0.35) !important;
+    }
+
+    .palette {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .swatch {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.35);
+      cursor: pointer;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05), inset 0 0 0 1px rgba(0,0,0,0.25);
+      transition: transform .06s ease, outline .2s ease, box-shadow .2s ease;
+    }
+    .swatch:hover { transform: translateY(-1px); }
+    .swatch-selected { outline: 3px solid #fff; }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(11, 18, 36, 0.7);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #cbd5e1;
+      font-size: 13px;
+    }
+    .swatch-mini {
+      width: 16px;
+      height: 16px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.25);
+    }
+
+    .all-btn { border-radius: 12px; }
+    h5 { color: #cbd5e1; margin: 0; font-weight: 600; }
   </style>
 </head>
-<body class="bg-light p-4">
-  <div class="container">
-    <h1 class="mb-4">Groups & Color Sender</h1>
-    <div class="row">
+<body>
+  <div class="shell">
+    <!-- Header with centered image -->
+    <div class="d-flex justify-content-center align-items-center mb-3">
+      <img src="/img/itarget.png" alt="iTarget" class="logo">
+    </div>
+    <p class="text-center text-secondary-emphasis mb-4" style="color:#cbd5e1 !important">RGB Lights</p>
+
+    <div class="row g-3">
       <!-- LEFT COLUMN -->
       <div class="col-md-6">
         <!-- Group 1 -->
-        <div class="mb-3 border rounded p-3" data-group="1">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5 class="m-0">Group 1 (7 buttons)</h5>
-            <button class="btn btn-primary w-100 py-2 mt-2" data-role="all" data-group="1">All</button>
+        <div class="panel" data-group="1">
+          <div class="group-head">
+            <h5>Group 1 (7)</h5>
           </div>
-          <div class="d-flex gap-2 flex-wrap" id="group1"></div>
+          <div class="d-flex gap-2 flex-wrap mb-2" id="group1"></div>
+          <button class="btn btn-primary w-100 py-2 all-btn" data-id="all" data-group="1">All</button>
         </div>
 
         <!-- Group 3 -->
-        <div class="mb-3 border rounded p-3" data-group="3">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5 class="m-0">Group 3 (2 buttons)</h5>
-            <button class="btn btn-primary w-100 py-2 mt-2" data-role="all" data-group="3">All</button>
+        <div class="panel mt-3" data-group="3">
+          <div class="group-head">
+            <h5>Group 3 (2)</h5>
           </div>
-          <div class="d-flex gap-2 flex-wrap" id="group3"></div>
+          <div class="d-flex gap-2 flex-wrap mb-2" id="group3"></div>
+          <button class="btn btn-primary w-100 py-2 all-btn" data-id="all" data-group="3">All</button>
         </div>
       </div>
 
       <!-- RIGHT COLUMN -->
       <div class="col-md-6">
         <!-- Group 2 -->
-        <div class="mb-3 border rounded p-3" data-group="2">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5 class="m-0">Group 2 (7 buttons)</h5>
-            <button class="btn btn-primary w-100 py-2 mt-2" data-role="all" data-group="2">All</button>
+        <div class="panel" data-group="2">
+          <div class="group-head">
+            <h5>Group 2 (7)</h5>
           </div>
-          <div class="d-flex gap-2 flex-wrap" id="group2"></div>
+          <div class="d-flex gap-2 flex-wrap mb-2" id="group2"></div>
+          <button class="btn btn-primary w-100 py-2 all-btn" data-id="all" data-group="2">All</button>
         </div>
 
         <!-- Group 4 -->
-        <div class="mb-3 border rounded p-3" data-group="4">
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5 class="m-0">Group 4 (2 buttons)</h5>
-            <button class="btn btn-primary w-100 py-2 mt-2" data-role="all" data-group="4">All</button>
+        <div class="panel mt-3" data-group="4">
+          <div class="group-head">
+            <h5>Group 4 (2)</h5>
           </div>
-          <div class="d-flex gap-2 flex-wrap" id="group4"></div>
+          <div class="d-flex gap-2 flex-wrap mb-2" id="group4"></div>
+          <button class="btn btn-primary w-100 py-2 all-btn" data-id="all" data-group="4">All</button>
         </div>
       </div>
     </div>
 
-    <h4 class="mt-4">Pick a Color</h4>
-    <div class="palette" id="palette"></div>
-
-    <div class="mt-3">
-      <strong>Last Sent:</strong> <span id="status">n/a</span>
+    <div class="panel mt-4">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <h5 class="m-0">Pick a Color</h5>
+        <span class="status-pill">
+          <span class="swatch-mini" id="miniSwatch" style="background: rgb(0,0,255)"></span>
+          <span id="status">Waiting…</span>
+        </span>
+      </div>
+      <div class="palette" id="palette"></div>
     </div>
   </div>
 
   <script>
-    // Per-group IDs start at 1
+    // Groups: per-group button IDs start at 1
     const groups = {
       1: { containerId: "group1", ids: [1,2,3,4,5,6,7] },
       2: { containerId: "group2", ids: [1,2,3,4,5,6,7] },
@@ -79,26 +171,26 @@
 
     // Fixed palette
     const colors = [
-      { name: "Red", rgb: "255,0,0" },
-      { name: "Green", rgb: "0,255,0" },
-      { name: "Blue", rgb: "0,0,255" },
-      { name: "Yellow", rgb: "255,255,0" },
-      { name: "Cyan", rgb: "0,255,255" },
+      { name: "Red",     rgb: "255,0,0"   },
+      { name: "Green",   rgb: "0,255,0"   },
+      { name: "Blue",    rgb: "0,0,255"   },
+      { name: "Yellow",  rgb: "255,255,0" },
+      { name: "Cyan",    rgb: "0,255,255" },
       { name: "Magenta", rgb: "255,0,255" },
-      { name: "Orange", rgb: "255,165,0" },
-      { name: "White", rgb: "255,255,255" },
-      { name: "Black", rgb: "0,0,0" }
+      { name: "Orange",  rgb: "255,165,0" },
+      { name: "White",   rgb: "255,255,255" },
+      { name: "Black",   rgb: "0,0,0" }
     ];
 
-    // Build buttons
+    // Build number buttons
     Object.entries(groups).forEach(([groupNum, cfg]) => {
       const el = document.getElementById(cfg.containerId);
       cfg.ids.forEach((id) => {
         const b = document.createElement("button");
-        b.className = "btn btn-outline-secondary btn-custom";
+        b.className = "btn btn-outline-secondary btn-custom btn-selectable";
         b.textContent = id;
-        b.dataset.id = id;            // per-group button id
-        b.dataset.group = groupNum;   // group number
+        b.dataset.id = id;
+        b.dataset.group = groupNum;
         el.appendChild(b);
       });
     });
@@ -114,46 +206,59 @@
       palette.appendChild(div);
     });
 
+    // Selection state
+    let selectedTarget = null; // { group: number, id: string }
     let selectedColor = colors[2].rgb; // default Blue
-    // Show selected outline
+    // show default color highlight
     setTimeout(() => {
       const defaultSwatch = [...document.querySelectorAll(".swatch")]
         .find(s => s.dataset.rgb === selectedColor);
-      if (defaultSwatch) defaultSwatch.style.outline = "3px solid black";
+      if (defaultSwatch) defaultSwatch.classList.add("swatch-selected");
+      document.getElementById("miniSwatch").style.background = `rgb(${selectedColor})`;
+      document.getElementById("status").textContent = "Pick a button, then a color";
     });
 
-    // Handle palette click
-    palette.addEventListener("click", e => {
-      if (e.target.classList.contains("swatch")) {
-        selectedColor = e.target.dataset.rgb;
-        document.querySelectorAll(".swatch").forEach(s => s.style.outline = "");
-        e.target.style.outline = "3px solid black";
+    // Helper: set selected button highlight
+    function setSelectedButton(btnEl) {
+      document.querySelectorAll(".btn-selectable, .all-btn").forEach(b => b.classList.remove("btn-selected"));
+      if (btnEl) btnEl.classList.add("btn-selected");
+    }
+
+    // Handle button clicks (numbers + All)
+    document.body.addEventListener("click", (e) => {
+      const t = e.target;
+      // All buttons
+      if (t.classList.contains("all-btn")) {
+        selectedTarget = { group: Number(t.dataset.group), id: "all" };
+        setSelectedButton(t);
+        document.getElementById("status").textContent = `Selected: Group ${selectedTarget.group}, All`;
+        return;
+      }
+      // Numbered buttons
+      if (t.classList.contains("btn-selectable") && t.dataset.group && t.dataset.id) {
+        selectedTarget = { group: Number(t.dataset.group), id: String(t.dataset.id) };
+        setSelectedButton(t);
+        document.getElementById("status").textContent = `Selected: Group ${selectedTarget.group}, ID ${selectedTarget.id}`;
       }
     });
 
-    // Delegate clicks: individual buttons and "All"
-    document.body.addEventListener("click", async e => {
-      const target = e.target;
+    // Handle palette click -> only sends if a button is selected
+    palette.addEventListener("click", async (e) => {
+      if (!e.target.classList.contains("swatch")) return;
 
-      // "All" buttons
-      if (target.matches('[data-role="all"]')) {
-        const group = Number(target.dataset.group);
-        await sendPayload({ group, id: "all", color: selectedColor });
+      if (!selectedTarget) {
+        alert("Select a button first (including 'All').");
         return;
       }
 
-      // Individual buttons
-      if (target.dataset && target.dataset.id && target.dataset.group) {
-        if (!selectedColor) { alert("Pick a color first!"); return; }
-        const id = String(target.dataset.id);
-        const group = Number(target.dataset.group);
-        await sendPayload({ group, id, color: selectedColor });
-      }
-    });
+      // Update selected color highlight
+      document.querySelectorAll(".swatch").forEach(s => s.classList.remove("swatch-selected"));
+      e.target.classList.add("swatch-selected");
+      selectedColor = e.target.dataset.rgb;
+      document.getElementById("miniSwatch").style.background = `rgb(${selectedColor})`;
 
-    async function sendPayload(payload) {
-      // Update UI
-      document.getElementById("status").textContent = JSON.stringify(payload);
+      const payload = { group: selectedTarget.group, id: selectedTarget.id, color: selectedColor };
+      document.getElementById("status").textContent = `Sending: ${JSON.stringify(payload)}`;
 
       try {
         const res = await fetch("/api/color", {
@@ -162,11 +267,15 @@
           body: JSON.stringify(payload),
         });
         if (!res.ok) throw new Error("HTTP " + res.status);
+        document.getElementById("status").textContent = `Sent: ${JSON.stringify(payload)}`;
+        // (Optional) clear selection after send:
+        // selectedTarget = null; setSelectedButton(null);
       } catch (err) {
         console.error("Send failed:", err);
         alert("Failed to send color. See console.");
+        document.getElementById("status").textContent = "Error sending payload";
       }
-    }
+    });
   </script>
 </body>
 </html>

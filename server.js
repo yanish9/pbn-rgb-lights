@@ -62,5 +62,5 @@ function setColor(req){
     // });
   });
 
-  res.status(200).send('Data saved successfully');
+  //res.status(200).send('Data saved successfully');
 }
