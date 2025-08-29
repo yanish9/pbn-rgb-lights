@@ -19,7 +19,9 @@
       border-radius: 20px;
       padding: 24px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.02);
+      position: relative;
     }
+
     .logo { max-width: 160px; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35)); }
     .panel {
       background: rgba(15, 23, 42, 0.55);
@@ -28,6 +30,13 @@
       padding: 16px;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
     }
+
+     .refresh-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+
     .btn-custom {
       border: 1px solid #475569;           /* slate-600 */
       border-radius: 12px;
@@ -93,6 +102,8 @@
 </head>
 <body>
   <div class="shell">
+     <button class="btn btn-outline-light refresh-btn" onclick="location.reload()">⟳ Refresh</button>
+
     <div class="d-flex justify-content-center align-items-center mb-3">
       <img src="/img/itarget.png" alt="iTarget" class="logo">
     </div>
